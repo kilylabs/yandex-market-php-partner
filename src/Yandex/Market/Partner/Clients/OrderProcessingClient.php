@@ -82,7 +82,7 @@ class OrderProcessingClient extends Client
      * @param $orderId
      * @param array $params
      * @param null $dbgKey
-     * @return GetOrderResponse
+     * @return \Yandex\Marketplace\Partner\Models\OrderInfo
      * @throws GuzzleException
      * @throws ForbiddenException
      * @throws UnauthorizedException
@@ -94,8 +94,9 @@ class OrderProcessingClient extends Client
         $resource .= '?' . $this->buildQueryString($params, $dbgKey);
         $response = $this->sendRequest('GET', $this->getServiceUrl($resource));
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
+        $getOrderResponse = new GetOrderResponse($decodedResponseBody);
 
-        return new GetOrderResponse($decodedResponseBody);
+        return $getOrderResponse->getOrder();
     }
 
     /**
@@ -128,7 +129,7 @@ class OrderProcessingClient extends Client
      * @https://yandex.ru/dev/market/partner-dsbs/doc/dg/reference/get-delivery-services.html
      *
      * @param null $dbgKey
-     * @return GetDeliveryServiceResponse
+     * @return \Yandex\Market\Partner\Models\DeliveryServices
      * @throws GuzzleException
      * @throws ForbiddenException
      * @throws UnauthorizedException
@@ -140,8 +141,9 @@ class OrderProcessingClient extends Client
         $resource = $this->addDebugKey($resource, $dbgKey);
         $response = $this->sendRequest('GET', $this->getServiceUrl($resource));
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
+        $getDeliveryServiceResponse = new GetDeliveryServiceResponse($decodedResponseBody['result']);
 
-        return new GetDeliveryServiceResponse($decodedResponseBody['result']);
+        return $getDeliveryServiceResponse->getDeliveryService();
     }
 
     /**
@@ -153,7 +155,7 @@ class OrderProcessingClient extends Client
      * @param $orderId
      * @param array $params
      * @param null $dbgKey
-     * @return GetBuyerResponse
+     * @return \Yandex\Market\Partner\Models\Buyer
      * @throws ForbiddenException
      * @throws GuzzleException
      * @throws PartnerRequestException
@@ -165,7 +167,8 @@ class OrderProcessingClient extends Client
         $resource .= '?' . $this->buildQueryString($params, $dbgKey);
         $response = $this->sendRequest('GET', $this->getServiceUrl($resource));
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
+        $getBuyerResponse = new GetBuyerResponse($decodedResponseBody);
 
-        return new GetBuyerResponse($decodedResponseBody);
+        return $getBuyerResponse->getBuyer();
     }
 }

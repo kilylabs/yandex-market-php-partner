@@ -13,13 +13,14 @@ class OrderProcessingFromMarketClient extends Client
      * @see https://yandex.ru/dev/market/partner-dsbs/doc/dg/reference/post-cart.html
      *
      * @param $response
-     * @return GetCartResponse
+     * @return \Yandex\Market\Partner\Models\Cart
      */
     public function getCart($response)
     {
         $decodedResponseBody = $this->getDecodedBody($response);
+        $getCartResponse = new GetCartResponse($decodedResponseBody);
 
-        return new GetCartResponse($decodedResponseBody);
+        return $getCartResponse->getCart();
     }
 
     /**
@@ -28,13 +29,14 @@ class OrderProcessingFromMarketClient extends Client
      * @see https://yandex.ru/dev/market/partner-dsbs/doc/dg/reference/post-order-accept.html
      *
      * @param $response
-     * @return AcceptOrderResponse
+     * @return \Yandex\Marketplace\Partner\Models\OrderInfo
      */
     public function acceptOrder($response)
     {
         $decodedResponseBody = $this->getDecodedBody($response);
+        $acceptOrderResponse = new AcceptOrderResponse($decodedResponseBody);
 
-        return new AcceptOrderResponse($decodedResponseBody);
+        return $acceptOrderResponse->getOrder();
     }
 
     /**
@@ -43,13 +45,14 @@ class OrderProcessingFromMarketClient extends Client
      * @see https://yandex.ru/dev/market/partner-dsbs/doc/dg/reference/post-order-status.html
      *
      * @param $response
-     * @return AcceptOrderResponse
+     * @return \Yandex\Marketplace\Partner\Models\OrderInfo
      */
     public function orderStatus($response)
     {
         $decodedResponseBody = $this->getDecodedBody($response);
+        $acceptOrderResponse = new AcceptOrderResponse($decodedResponseBody);
 
-        return new AcceptOrderResponse($decodedResponseBody);
+        return $acceptOrderResponse->getOrder();
     }
 
     /**

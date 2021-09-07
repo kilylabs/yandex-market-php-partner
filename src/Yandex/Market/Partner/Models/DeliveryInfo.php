@@ -21,6 +21,7 @@ class DeliveryInfo extends Model
 
     protected $deliveryPartnerType;
     protected $deliveryServiceId;
+    protected $shopDeliveryId;
     protected $id;
     protected $outletCode;
     protected $price;
@@ -133,5 +134,13 @@ class DeliveryInfo extends Model
     public function getOutlet()
     {
         return $this->outlet;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShopDeliveryId()
+    {
+        return $this->shopDeliveryId;
     }
 }
