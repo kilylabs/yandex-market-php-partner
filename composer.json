@@ -5,11 +5,12 @@
   "type":"library",
   "license": "MIT",
   "minimum-stability": "dev",
+  "prefer-stable" : true,
   "require": {
     "php": ">=5.6",
     "ext-curl": "*",
     "ext-json": "*",
-    "yandex-market/yandex-market-php-common": "1.*.*"
+    "yandex-market/yandex-market-php-common": "^1.2.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0",
@@ -30,5 +31,11 @@
   },
   "scripts": {
     "test" : "php vendor/bin/phpunit --configuration tests/phpunit.xml.dist --coverage-clover=.reports/clover.xml"
-  }
+  },
+  "repositories": [
+      {
+          "type": "composer",
+          "url": "https://pkg.kilylabs.com"
+      }
+  ]
 }
